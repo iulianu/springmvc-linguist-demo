@@ -1,0 +1,18 @@
+To run
+  mvn tomcat7:run
+
+To run tests:
+  mvn test
+
+Tested with JRE 1.8.0_112 on macOS 10.12.2.
+
+Functional notes
+===
+No concern at all was given to escaping characters. The & character is used as a
+delimiter but could conceivably appear in a phrase as well.
+
+Also no concern at all was given to encoding. Requests and responses are assumed
+to be UTF-8 strings.
+
+No validation is performed on token counts, in other words the service does not
+do tokenization, it transparently passes token counts back.
