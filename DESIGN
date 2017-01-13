@@ -6,10 +6,11 @@ https://spring.io/guides/gs/rest-service/
 
 JSON conversion done implicitly through MappingJackson2HttpMessageConverter.
 
-Because the Servlet API is not streaming, the request has to be read entirely
-in memory. This limits our ability to handle large request bodies in a memory-efficient
-manner.
-The service layer _does_ have a streaming approach.
+Because I did not want to deal with the raw InputStream exposed by the Servlet API,
+I am reading the entire request in memory. This will not work with request bodies
+large enough to overflow the Java heap.
+
+The service layer _is_ designed to work with streams though.
 
 Everything is in one JAR, but in real life the business logic and
 the web service would be in different JARs, built separately.
