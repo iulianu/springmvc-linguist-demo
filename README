@@ -19,5 +19,8 @@ delimiter but could conceivably appear in a phrase as well.
 Also no concern at all was given to encoding. Requests and responses are assumed
 to be UTF-8 strings.
 
-No validation is performed on token counts, in other words the service does not
-do tokenization, it transparently passes token counts back.
+For the /format endpoit, no validation is performed on token counts,
+in other words the service does not do tokenization, it transparently passes token counts back.
+
+For the /ngram endpoint, a _token_ is composed of alphanumeric characters only:
+i.e. letters and digits. All other characters, punctuation, question marks, etc, are ignored.
