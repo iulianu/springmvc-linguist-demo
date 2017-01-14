@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.concurrent.Callable;
 
 @RestController
 public final class MungingController {
@@ -17,8 +18,8 @@ public final class MungingController {
     }
 
     @PostMapping(value = "/format")
-    MungingResponse munge(@Valid @RequestBody MungingRequest mungingRequest) {
-        return new MungingResponse(
+    public Callable<MungingResponse> munge(@Valid @RequestBody MungingRequest mungingRequest) {
+        return () -> new MungingResponse(
                 mungingService.unmungedPhraseBook(mungingRequest.getText()).toMungedString());
     }
 }

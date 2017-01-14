@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.concurrent.Callable;
 import java.util.stream.Collectors;
 
 @RestController
@@ -21,8 +22,8 @@ public final class NgramCountController {
     }
 
     @PostMapping(value = "/ngram")
-    List<NgramCountResponse> ngramCount(@Valid @RequestBody NgramCountRequest ngramCountRequest) {
-        return ngramCountService.countNgrams(ngramCountRequest.getMaxNGramCount(), ngramCountRequest.getText())
+    public Callable<List<NgramCountResponse>> ngramCount(@Valid @RequestBody NgramCountRequest ngramCountRequest) {
+        return () -> ngramCountService.countNgrams(ngramCountRequest.getMaxNGramCount(), ngramCountRequest.getText())
                 .stream()
                 .map(NgramCountResponse::fromNgramCount)
                 .collect(Collectors.toList());

@@ -9,14 +9,24 @@ Controllers are the entry points into the service. JSON requests and
 responses are represented as POJOs e.g. MungingRequest, MungingResponse.
 JSON conversion is done implicitly through MappingJackson2HttpMessageConverter.
 
-Because I did not want to deal with the raw InputStream exposed by the Servlet API,
-I am reading the entire request in memory. This will not work with request bodies
-large enough to overflow the Java heap.
+Controller methods are asynchronous, they return Callable<R> instead
+of a response type R. For such controller methods, Spring MVC uses
+Servlet 3.0 async processing to offload the handling of the request
+to a different thread.
 
-The service layer _is_ designed to work with streams though.
+The JSON endpoints, as specified in the problem statement, are not well
+suited for streaming. Therefore the service has to read the entire
+request in memory before beginning processing. This will not work with
+request bodies large enough to overflow the JVM heap.
+
+The underlying service layer _is_ designed to work with text streams,
+anticipating a future service endpoint in which you simply upload text.
 
 Everything is in one JAR, but in real life the business logic and
 the web service would be in different JARs, built separately.
 
 We use raw types (String, int) but for better design we should have
 value types, e.g. for token counts which must be unsigned ints.
+
+Controllers are not unit-tested yet. To add controller tests, you will
+put the service behind an interface, which allows you to mock it.
