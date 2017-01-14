@@ -1,4 +1,7 @@
-To run
+Getting started
+===
+
+To run the service:
   mvn tomcat7:run
 
 The service starts on port 9090.
@@ -9,18 +12,23 @@ to "application/json".
 To run tests:
   mvn test
 
-Tested with JRE 1.8.0_112 on macOS 10.12.2.
+This code was developed and tested with JRE 1.8.0_112 and Maven 3.3.9
+on macOS 10.12.2.
 
 Functional notes
 ===
-No concern at all was given to escaping characters. The & character is used as a
-delimiter but could conceivably appear in a phrase as well.
 
-Also no concern at all was given to encoding. Requests and responses are assumed
-to be UTF-8 strings.
+No concern at all was given to escaping characters. For example, the
+'&' character is used as a delimiter but could conceivably appear in
+a phrase as well.
 
-For the /format endpoit, no validation is performed on token counts,
-in other words the service does not do tokenization, it transparently passes token counts back.
+Also no concern at all was given to encoding. Requests and responses
+are assumed to be UTF-8 strings.
 
-For the /ngram endpoint, a _token_ is composed of alphanumeric characters only:
-i.e. letters and digits. All other characters, punctuation, question marks, etc, are ignored.
+For the /format endpoint, no validation is performed on token counts,
+in other words the service does not do tokenization, it transparently
+passes token counts back.
+
+For the /ngram endpoint, a _token_ is composed of alphanumeric characters
+only, i.e. letters and digits. All other characters, punctuation,
+question marks, etc, are ignored.
