@@ -1,5 +1,6 @@
 package com.iuliandogariu.linguist.munging;
 
+import com.iuliandogariu.linguist.TextStream;
 import org.springframework.stereotype.Service;
 
 import java.io.*;
@@ -48,11 +49,6 @@ public class MungingService {
      * @return a Stream of Strings each representing a single phrase pair.
      */
     Stream<String> unmungedPhraseStream(Reader unmungedReader) {
-        Pattern pairPattern = Pattern.compile("(?:\\A|\\s+)(?=PP \\d+ \\d+)");
-        Scanner scanner = new Scanner(unmungedReader);
-        scanner.useDelimiter(pairPattern);
-        return StreamSupport.stream(
-                Spliterators.spliteratorUnknownSize(scanner, Spliterator.ORDERED),
-                false);
+        return TextStream.ofReaderWithDelimiter(unmungedReader, "(?:\\A|\\s+)(?=PP \\d+ \\d+)");
     }
 }

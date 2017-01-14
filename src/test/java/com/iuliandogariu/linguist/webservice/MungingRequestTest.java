@@ -1,16 +1,8 @@
 package com.iuliandogariu.linguist.webservice;
 
-import com.iuliandogariu.linguist.webservice.MungingRequest;
 import org.junit.Test;
 
-import javax.validation.ConstraintViolation;
-import javax.validation.Validation;
-import javax.validation.Validator;
-import javax.validation.ValidatorFactory;
-import java.util.Set;
-
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static com.iuliandogariu.linguist.webservice.JavaxValidationAssertions.*;
 
 public final class MungingRequestTest {
 
@@ -39,25 +31,5 @@ public final class MungingRequestTest {
         String wellFormedBigText = "PP 2 2 l'homme $ the man & blah" + new String(bigBuffer);
         MungingRequest req = new MungingRequest(wellFormedBigText);
         assertOneViolation(req, "text", "size must be between 0 and 1048576");
-    }
-
-    private Validator validator;
-
-    public MungingRequestTest() {
-        ValidatorFactory vf = Validation.buildDefaultValidatorFactory();
-        validator = vf.getValidator();
-    }
-
-    private void assertNoViolation(MungingRequest req) {
-        Set<ConstraintViolation<MungingRequest>> violations = validator.validate(req);
-        assertTrue(violations.isEmpty());
-    }
-
-    private void assertOneViolation(MungingRequest req, String field, String message) {
-        Set<ConstraintViolation<MungingRequest>> violations = validator.validate(req);
-        assertEquals(1, violations.size());
-        ConstraintViolation<MungingRequest> violation = violations.iterator().next();
-        assertEquals(field, violation.getPropertyPath().toString());
-        assertEquals(message, violation.getMessage());
     }
 }
