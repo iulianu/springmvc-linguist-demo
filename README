@@ -1,6 +1,11 @@
 To run
   mvn tomcat7:run
 
+The service starts on port 9090.
+
+When sending JSON requests, make sure to set the Content-Type header
+to "application/json".
+
 To run tests:
   mvn test
 
