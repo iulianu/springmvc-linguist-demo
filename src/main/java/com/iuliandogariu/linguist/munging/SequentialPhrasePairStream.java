@@ -1,6 +1,6 @@
 package com.iuliandogariu.linguist.munging;
 
-import com.iuliandogariu.linguist.SequentialTokenizingStream;
+import com.iuliandogariu.util.stream.SequentialTokenizingStream;
 
 import java.io.Reader;
 import java.util.stream.Stream;

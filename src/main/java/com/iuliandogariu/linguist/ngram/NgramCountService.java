@@ -1,7 +1,6 @@
 package com.iuliandogariu.linguist.ngram;
 
-import com.iuliandogariu.linguist.SequentialTokenizingStream;
-import com.iuliandogariu.linguist.TopCounts;
+import com.iuliandogariu.util.TopCounts;
 import org.springframework.stereotype.Service;
 
 import java.io.Reader;

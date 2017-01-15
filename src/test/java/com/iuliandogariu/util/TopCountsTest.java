@@ -1,4 +1,4 @@
-package com.iuliandogariu.linguist;
+package com.iuliandogariu.util;
 
 import org.junit.Test;
 import static org.junit.Assert.*;

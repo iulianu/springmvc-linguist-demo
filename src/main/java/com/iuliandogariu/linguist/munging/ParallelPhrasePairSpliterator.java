@@ -1,6 +1,6 @@
 package com.iuliandogariu.linguist.munging;
 
-import com.iuliandogariu.linguist.ParallelTokenizingSpliterator;
+import com.iuliandogariu.util.stream.ParallelTokenizingSpliterator;
 import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.Spliterator;

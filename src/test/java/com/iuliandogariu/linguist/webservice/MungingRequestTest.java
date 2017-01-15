@@ -2,7 +2,7 @@ package com.iuliandogariu.linguist.webservice;
 
 import org.junit.Test;
 
-import static com.iuliandogariu.linguist.webservice.JavaxValidationAssertions.*;
+import static com.iuliandogariu.test.JavaxValidationAssertions.*;
 
 public final class MungingRequestTest {
 

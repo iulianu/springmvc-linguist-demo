@@ -1,4 +1,4 @@
-package com.iuliandogariu.linguist;
+package com.iuliandogariu.util.stream;
 
 import org.apache.commons.lang3.tuple.Pair;
 

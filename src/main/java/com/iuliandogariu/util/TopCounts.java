@@ -1,4 +1,4 @@
-package com.iuliandogariu.linguist;
+package com.iuliandogariu.util;
 
 import java.util.*;
 import java.util.stream.Collectors;

@@ -1,4 +1,4 @@
-package com.iuliandogariu.linguist.webservice;
+package com.iuliandogariu.test;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;

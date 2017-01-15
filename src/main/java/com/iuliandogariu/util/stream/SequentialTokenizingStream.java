@@ -1,4 +1,4 @@
-package com.iuliandogariu.linguist;
+package com.iuliandogariu.util.stream;
 
 import java.io.Reader;
 import java.util.Scanner;
