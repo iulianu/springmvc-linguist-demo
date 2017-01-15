@@ -19,22 +19,6 @@ import static java.util.stream.Collectors.counting;
 @Service
 public class NgramCountService {
 
-    private static final int DEFAULT_NUM_SPLITS = 4;
-
-    public NgramCountService() {
-        this(DEFAULT_NUM_SPLITS);
-    }
-
-    public NgramCountService(int numSplits) {
-        this.numSplits = numSplits;
-    }
-
-    /**
-     * How many parallel splits of the input text to use.
-     * Each split is processed by a different thread.
-     */
-    private int numSplits;
-
     /**
      * Counts N-grams (1-grams, 2-grams and 3-grams) occurring in the specified text.
      * @return list of Ngram counts in descending order of count,
