@@ -5,9 +5,11 @@ import java.util.stream.Collectors;
 
 public class PhraseBook {
 
+    public static final String OUTPUT_DELIMITER = " ";
+
     /** Joins phrase pairs in munged form */
     public static Collector<CharSequence, ?, String> mungedCollector() {
-        return Collectors.joining(" ");
+        return Collectors.joining(OUTPUT_DELIMITER);
     }
 
 }

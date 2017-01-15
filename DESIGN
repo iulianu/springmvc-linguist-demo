@@ -32,6 +32,11 @@ request in memory before beginning processing. This will not work with
 request bodies large enough to overflow the JVM heap.
 I am anticipating a future service endpoint in which you simply upload text.
 
+A demo of the sequential Munging service is MungingApp, a console app.
+It reads the unmunged phrase pairs from standard input and writes
+the munged phrase pairs to the standard output. It can work with files
+of arbitrary size with no need for a large Java heap.
+
 Everything is in one JAR, but in real life the business logic and
 the web service would be in different JARs, built separately.
 

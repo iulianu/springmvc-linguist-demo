@@ -5,6 +5,7 @@ import com.iuliandogariu.linguist.munging.PhrasePair;
 import org.springframework.stereotype.Service;
 
 import java.io.Reader;
+import java.io.Writer;
 
 /**
  * Returns munged representations of phrase pairs passed in
@@ -21,16 +22,17 @@ public class JavaStreamsSequentialMungingService implements SequentialMungingSer
 
     /**
      * @param unmungedTextReader the unmunged form of the phrase pairs, as a Reader
-     * @return munged representation of all the phrase pairs in the text.
-     *
-     * TODO don't accumulate the results in memory, instead write them out to
-     * a Writer using a custom Consumer.
+     * @param out writer where to write munged phrase pairs.
      */
     @Override
-    public String mungedPhrasePairsFromStream(Reader unmungedTextReader) {
-        return SequentialPhrasePairStream.fromUnmunged(unmungedTextReader)
-                .map(PhrasePair::toMungedString)
-                .collect(PhraseBook.mungedCollector());
+    public void mungedPhrasePairsFromStream(Reader unmungedTextReader, Writer out) {
+        SequentialPhrasePairStream.fromUnmunged(unmungedTextReader)
+            .map(PhrasePair::toMungedString)
+            .collect(
+                    () -> new PhrasePairWriterConsumer(out),
+                    PhrasePairWriterConsumer::accept,
+                    PhrasePairWriterConsumer::combine
+            );
     }
 
 }

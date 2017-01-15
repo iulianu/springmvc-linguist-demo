@@ -1,6 +1,7 @@
 package com.iuliandogariu.linguist.munging.sequential;
 
 import java.io.Reader;
+import java.io.Writer;
 
 /**
  * Returns munged representations of phrase pairs passed in
@@ -12,11 +13,8 @@ public interface SequentialMungingService {
 
     /**
      * @param unmungedTextReader the unmunged form of the phrase pairs, as a Reader
-     * @return munged representation of all the phrase pairs in the text.
-
-     * TODO don't accumulate the results in memory, instead write them out to
-     * a Writer.
+     * @param out writer where to write munged phrase pairs.
      */
-    String mungedPhrasePairsFromStream(Reader unmungedTextReader);
+    void mungedPhrasePairsFromStream(Reader unmungedTextReader, Writer out);
 
 }
