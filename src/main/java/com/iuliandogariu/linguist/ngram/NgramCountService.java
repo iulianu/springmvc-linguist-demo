@@ -1,6 +1,6 @@
 package com.iuliandogariu.linguist.ngram;
 
-import com.iuliandogariu.linguist.SequentialTokenStream;
+import com.iuliandogariu.linguist.SequentialTokenizingStream;
 import com.iuliandogariu.linguist.TopCounts;
 import org.springframework.stereotype.Service;
 
@@ -43,7 +43,7 @@ public class NgramCountService {
      * as opposed to the full text in memory.
      */
     public List<Map.Entry<Ngram, Long>> countNgramsInStream(int maxNgramCount, Reader textReader) {
-        Map<Ngram, Long> counts = SequentialTokenStream.ofReaderWithDelimiter(textReader, Ngram.DELIMITER_PATTERN)
+        Map<Ngram, Long> counts = SequentialTokenStream.ofReader(textReader)
                 .collect(SequentialNgramCounterConsumer::new, SequentialNgramCounterConsumer::accept, SequentialNgramCounterConsumer::combine)
                 .getCounts();
         return TopCounts.ofMap(counts, maxNgramCount);

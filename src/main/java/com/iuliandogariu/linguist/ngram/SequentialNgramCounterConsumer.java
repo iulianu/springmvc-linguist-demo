@@ -24,10 +24,10 @@ class SequentialNgramCounterConsumer implements Consumer<String> {
     }
 
     /**
-     * Combiner method provided, but never expected to be called,
-     * because this collector works only on sequential streams.
+     * This collector works only on sequential streams.
      */
     public void combine(SequentialNgramCounterConsumer other) {
-        other.getCounts().forEach((k, v) -> counts.merge(k, v, Long::sum));
+        throw new AssertionError("No combiners allowed on SequentialNgramCounterConsumer");
+        //other.getCounts().forEach((k, v) -> counts.merge(k, v, Long::sum));
     }
 }

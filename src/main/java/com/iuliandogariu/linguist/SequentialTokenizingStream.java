@@ -8,7 +8,7 @@ import java.util.regex.Pattern;
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
 
-public class SequentialTokenStream {
+public class SequentialTokenizingStream {
 
     /**
      * Returns a stream of tokens from the given Reader, using the given

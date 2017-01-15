@@ -22,6 +22,11 @@ public final class Ngram {
     public String getTokens() { return tokens; }
 
     @Override
+    public String toString() {
+        return "{" + order + "," + tokens + "}";
+    }
+
+    @Override
     public int hashCode() {
         return new HashCodeBuilder(5, 37).
                 append(order).
