@@ -11,11 +11,12 @@ import java.util.regex.MatchResult;
 
 /**
  * A Spliterator that works over a String and emits N-grams.
- * It tries to split the work in parallel chunks of size approximately
- * equal to maxSplitSize.
+ * It tries to split the work in parallel, with chunks of text of size
+ * approximately equal to maxSplitSize characters.
  *
  * This spliterator works with a TokenMemory instance to remember
  * the past N-1 tokens.
+ *
  * When trying to split at a given position, the spliterator will scan
  * ahead in the string in order to populate the token memory.
  * This is why splits are only _approximately_ half-way.
@@ -28,10 +29,22 @@ public class ParallelNgramSpliterator extends ParallelTokenizingSpliterator<Ngra
         this(text, DEFAULT_SPLIT_SIZE, new String[]{});
     }
 
+    /**
+     *
+     * @param text text to work on
+     * @param maxSplitSize hint about the size of a chunk of text, in numbers of characters
+     */
     public ParallelNgramSpliterator(String text, int maxSplitSize) {
         this(text, maxSplitSize, new String[]{});
     }
 
+    /**
+     *
+     * @param text text to work on
+     * @param maxSplitSize hint about the size of a chunk of text, in numbers of characters
+     * @param pastTokens tokens with which to populate the token memory,
+     *                   this parameter is non-empty after the Spliterator has split in two.
+     */
     public ParallelNgramSpliterator(String text, int maxSplitSize, String[] pastTokens) {
         super(text, maxSplitSize, Ngram.DELIMITER_PATTERN);
 //        System.err.printf("Split %d %s\n", text.length(), text);

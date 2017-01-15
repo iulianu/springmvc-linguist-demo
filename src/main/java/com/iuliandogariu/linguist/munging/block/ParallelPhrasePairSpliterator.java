@@ -19,6 +19,11 @@ public class ParallelPhrasePairSpliterator extends ParallelTokenizingSpliterator
         this(text, DEFAULT_SPLIT_SIZE);
     }
 
+    /**
+     *
+     * @param text text to iterate on
+     * @param maxSplitSize hint about the size of a chunk of text, in numbers of characters
+     */
     public ParallelPhrasePairSpliterator(String text, int maxSplitSize) {
         super(text, maxSplitSize, UNMUNGED_FORMAT_DELIMITER);
         System.err.printf("Split %d %s\n", text.length(), text);

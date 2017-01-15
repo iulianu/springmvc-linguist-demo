@@ -22,7 +22,7 @@ stream of tokens and process the tokens, but in different ways.
   can work in parallel across all the cores on your system.
   See the classes ParallelTokenizingSpliterator and ParallelNgramSpliterator.
 * Service methods that work on InputStreams cannot parallelize the work.
-  These use the SequentialTokenStream class to tokenize the incoming
+  These use the SequentialTokenizingStream class to tokenize the incoming
   text stream, and a custom Consumer to update the counts for each
   token in turn.
 
@@ -38,5 +38,9 @@ the web service would be in different JARs, built separately.
 We use raw types (String, int) but for better design we should have
 value types, e.g. for token counts which must be unsigned ints.
 
-Controllers are not unit-tested yet. To add controller tests, you will
-put the service behind an interface, which allows you to mock it.
+For the /format endpoint, the format of the phrase pairs at input
+is poorly specified. There's nothing preventing the delimiter sequences,
+&, $, |, or PP, from occurring anywhere in the phrase pair, e.g. in the
+'other info' field. The current implementation scans for
+the string 'PP' followed by space followed by an integer followed
+ by a space followed by another integer.

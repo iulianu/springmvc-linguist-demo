@@ -11,6 +11,10 @@ import java.util.regex.Pattern;
 /**
  * A Spliterator template that works over a String and emits values
  * of type T based on String tokens.
+ *
+ * Implementation classes can be used to parallelize work on a
+ * body of text composed of tokens.
+ *
  * Tokens are scanned using the specified delimiter pattern.
  *
  * This abstract spliterator lets the implementer classes control
@@ -18,12 +22,19 @@ import java.util.regex.Pattern;
  */
 public abstract class ParallelTokenizingSpliterator<T> implements Spliterator<T> {
 
+    /** in numbers of characters */
     protected static final int DEFAULT_SPLIT_SIZE = 10_000;
     protected final String text;
     protected int maxSplitSize = 0;
     private int currentChar = 0;
     private Matcher delimiterMatcher;
 
+    /**
+     *
+     * @param text text to iterate on
+     * @param maxSplitSize hint about the size of a chunk of text, in numbers of characters
+     * @param delimiterPattern pattern that delimits tokens in the text
+     */
     protected ParallelTokenizingSpliterator(String text, int maxSplitSize, Pattern delimiterPattern) {
         this.maxSplitSize = maxSplitSize;
 //        System.err.printf("Split %d %s\n", text.length(), text);
