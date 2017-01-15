@@ -29,6 +29,9 @@ For the /format endpoint, no validation is performed on token counts,
 in other words the service does not do tokenization, it transparently
 passes token counts back.
 
+In case of syntax errors the request will fail in its entirety; there
+is no attempt to recover and/or return a partial result.
+
 For the /ngram endpoint, a _token_ is composed of alphanumeric characters
 only, i.e. letters and digits. All other characters, punctuation,
 question marks, etc, are ignored.
