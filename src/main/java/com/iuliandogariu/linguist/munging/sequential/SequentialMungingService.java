@@ -13,6 +13,9 @@ public interface SequentialMungingService {
     /**
      * @param unmungedTextReader the unmunged form of the phrase pairs, as a Reader
      * @return munged representation of all the phrase pairs in the text.
+
+     * TODO don't accumulate the results in memory, instead write them out to
+     * a Writer.
      */
     String mungedPhrasePairsFromStream(Reader unmungedTextReader);
 
