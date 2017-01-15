@@ -5,6 +5,10 @@ import org.apache.commons.collections4.queue.CircularFifoQueue;
 import java.util.ArrayList;
 import java.util.Collection;
 
+/**
+ * Accepts tokens in sequence and emits N-grams, holding
+ * a number of past tokens in a circular buffer.
+ */
 public class TokenMemory {
     /** By default we emit 1-grams, 2-grams and 3-grams */
     public static final int DEFAULT_MAX_ORDER = 3;

@@ -23,7 +23,7 @@ stream of tokens and process the tokens, but in different ways.
   See the classes ParallelTokenizingSpliterator and ParallelNgramSpliterator.
 * Service methods that work on InputStreams cannot parallelize the work.
   These use the SequentialTokenStream class to tokenize the incoming
-  text stream, and a custom Collector to update the counts for each
+  text stream, and a custom Consumer to update the counts for each
   token in turn.
 
 The JSON endpoints, as specified in the problem statement, are not well
