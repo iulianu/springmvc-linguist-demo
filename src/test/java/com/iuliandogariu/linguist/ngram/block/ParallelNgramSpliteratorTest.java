@@ -1,5 +1,6 @@
-package com.iuliandogariu.linguist.ngram;
+package com.iuliandogariu.linguist.ngram.block;
 
+import com.iuliandogariu.linguist.ngram.Ngram;
 import org.junit.Test;
 
 import java.util.List;

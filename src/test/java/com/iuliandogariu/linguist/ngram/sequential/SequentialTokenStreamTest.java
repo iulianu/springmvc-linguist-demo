@@ -1,4 +1,4 @@
-package com.iuliandogariu.linguist.ngram;
+package com.iuliandogariu.linguist.ngram.sequential;
 
 import org.junit.Test;
 

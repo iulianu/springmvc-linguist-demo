@@ -1,23 +1,22 @@
-package com.iuliandogariu.linguist.munging;
+package com.iuliandogariu.linguist.munging.sequential;
 
+import com.iuliandogariu.linguist.munging.PhrasePair;
 import org.junit.Test;
 
+import java.io.StringReader;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.StreamSupport;
 
 import static org.junit.Assert.assertEquals;
 
-
-public final class ParallelPhrasePairSpliteratorTest {
+public final class SequentialPhrasePairStreamTest {
 
     @Test
-    public void shouldStreamPhrasePairsInParallel() {
+    public void shouldScanTextForPairs() {
         String requestText = "PP 2 2 l'homme $ the man & blah PP 2 2 the woman $ la femme & lorem PP 1 1 Prost $ cheers & noroc";
-        List<PhrasePair> phrasePairs = StreamSupport.stream(
-                    new ParallelPhrasePairSpliterator(requestText, 5),true)
-                .collect(Collectors.toList());
+        List<PhrasePair> phrasePairs = SequentialPhrasePairStream.fromUnmunged(new StringReader(requestText))
+            .collect(Collectors.toList());
         assertEquals(
                 Arrays.asList(
                         new PhrasePair(2, "l'homme", 2, "the man", "blah"),
@@ -27,4 +26,5 @@ public final class ParallelPhrasePairSpliteratorTest {
                 phrasePairs
         );
     }
+
 }

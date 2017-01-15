@@ -1,4 +1,8 @@
-package com.iuliandogariu.linguist.ngram;
+package com.iuliandogariu.linguist.ngram.sequential;
+
+import com.iuliandogariu.linguist.ngram.CircularBufferTokenMemory;
+import com.iuliandogariu.linguist.ngram.Ngram;
+import com.iuliandogariu.linguist.ngram.TokenMemory;
 
 import java.util.*;
 import java.util.function.Consumer;

@@ -1,5 +1,6 @@
-package com.iuliandogariu.linguist.munging;
+package com.iuliandogariu.linguist.munging.block;
 
+import com.iuliandogariu.linguist.munging.PhrasePair;
 import com.iuliandogariu.util.stream.ParallelTokenizingSpliterator;
 import org.apache.commons.lang3.tuple.Pair;
 

@@ -1,5 +1,7 @@
-package com.iuliandogariu.linguist.ngram;
+package com.iuliandogariu.linguist.ngram.block;
 
+import com.iuliandogariu.linguist.ngram.CircularBufferTokenMemory;
+import com.iuliandogariu.linguist.ngram.Ngram;
 import com.iuliandogariu.util.stream.ParallelTokenizingSpliterator;
 import org.apache.commons.lang3.tuple.Pair;
 

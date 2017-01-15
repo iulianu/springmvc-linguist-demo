@@ -1,5 +1,6 @@
-package com.iuliandogariu.linguist.ngram;
+package com.iuliandogariu.linguist.ngram.sequential;
 
+import com.iuliandogariu.linguist.ngram.Ngram;
 import com.iuliandogariu.util.stream.SequentialTokenizingStream;
 
 import java.io.Reader;

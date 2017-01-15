@@ -1,6 +1,6 @@
 package com.iuliandogariu.linguist.webservice;
 
-import com.iuliandogariu.linguist.ngram.NgramCountService;
+import com.iuliandogariu.linguist.ngram.block.BlockNgramCountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -14,17 +14,17 @@ import java.util.stream.Collectors;
 @RestController
 public final class NgramCountController {
 
-    private NgramCountService ngramCountService;
+    private BlockNgramCountService ngramCountService;
 
     @Autowired
-    public NgramCountController(NgramCountService ngramCountService) {
+    public NgramCountController(BlockNgramCountService ngramCountService) {
         this.ngramCountService = ngramCountService;
     }
 
     @PostMapping(value = "/ngram")
     public Callable<List<NgramCountResponse>> ngramCount(@Valid @RequestBody NgramCountRequest ngramCountRequest) {
         // Note: if you had an InputStream instead of the full text,
-        // you would call NgramCountService.countNgramsInStream(new InputStreamReader(...))
+        // you would call SequentialNgramCountService.countNgramsInStream(new InputStreamReader(...))
         return () -> ngramCountService.countNgrams(ngramCountRequest.getMaxNGramCount(), ngramCountRequest.getText())
                 .stream()
                 .map(NgramCountResponse::fromNgramCount)

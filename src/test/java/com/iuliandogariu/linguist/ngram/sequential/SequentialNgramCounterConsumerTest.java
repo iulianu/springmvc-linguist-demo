@@ -1,5 +1,7 @@
-package com.iuliandogariu.linguist.ngram;
+package com.iuliandogariu.linguist.ngram.sequential;
 
+import com.iuliandogariu.linguist.ngram.Ngram;
+import com.iuliandogariu.linguist.ngram.TokenMemory;
 import org.junit.Test;
 import org.mockito.Mockito;
 import static org.mockito.Mockito.*;

@@ -1,5 +1,6 @@
-package com.iuliandogariu.linguist.munging;
+package com.iuliandogariu.linguist.munging.sequential;
 
+import com.iuliandogariu.linguist.munging.PhrasePair;
 import com.iuliandogariu.util.stream.SequentialTokenizingStream;
 
 import java.io.Reader;
