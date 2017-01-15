@@ -9,12 +9,12 @@ public final class TopCountsTest {
 
     @Test
     public void shouldSortAndReturnTopCounts() {
-        Map<String, Integer> counts = new HashMap<>();
-        counts.put("USA", 144);
-        counts.put("Germany", 90);
-        counts.put("Russia", 1230);
-        counts.put("Australia", 4);
-        List<Map.Entry<String, Integer>> topCounts = TopCounts.ofMap(counts, 2);
+        Map<String, Long> counts = new HashMap<>();
+        counts.put("USA", 144L);
+        counts.put("Germany", 90L);
+        counts.put("Russia", 1230L);
+        counts.put("Australia", 4L);
+        List<Map.Entry<String, Long>> topCounts = TopCounts.ofMap(counts, 2);
         assertEquals(2, topCounts.size());
         assertEquals("Russia", topCounts.get(0).getKey());
         assertEquals(1230, topCounts.get(0).getValue().intValue());

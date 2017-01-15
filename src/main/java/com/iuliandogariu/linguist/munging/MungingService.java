@@ -1,13 +1,10 @@
 package com.iuliandogariu.linguist.munging;
 
-import com.iuliandogariu.linguist.TextStream;
+import com.iuliandogariu.linguist.SequentialTokenStream;
 import org.springframework.stereotype.Service;
 
 import java.io.*;
-import java.util.*;
-import java.util.regex.Pattern;
 import java.util.stream.Stream;
-import java.util.stream.StreamSupport;
 
 /**
  * This service exposes two interfaces that do the same thing,
@@ -49,6 +46,6 @@ public class MungingService {
      * @return a Stream of Strings each representing a single phrase pair.
      */
     Stream<String> unmungedPhraseStream(Reader unmungedReader) {
-        return TextStream.ofReaderWithDelimiter(unmungedReader, "(?:\\A|\\s+)(?=PP \\d+ \\d+)");
+        return SequentialTokenStream.ofReaderWithDelimiter(unmungedReader, "(?:\\A|\\s+)(?=PP \\d+ \\d+)");
     }
 }

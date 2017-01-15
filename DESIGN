@@ -14,13 +14,23 @@ of a response type R. For such controller methods, Spring MVC uses
 Servlet 3.0 async processing to offload the handling of the request
 to a different thread.
 
+The underlying service layer is designed to work with either Strings or
+text streams. Both approaches use the Java 8 Streams API to produce a
+stream of tokens and process the tokens, but in different ways.
+* Service methods that work on Strings use a Spliterator that tries
+  to split the String into parallel chunks, so that the pipeline
+  can work in parallel across all the cores on your system.
+  See the classes ParallelTokenizingSpliterator and ParallelNgramSpliterator.
+* Service methods that work on InputStreams cannot parallelize the work.
+  These use the SequentialTokenStream class to tokenize the incoming
+  text stream, and a custom Collector to update the counts for each
+  token in turn.
+
 The JSON endpoints, as specified in the problem statement, are not well
 suited for streaming. Therefore the service has to read the entire
 request in memory before beginning processing. This will not work with
 request bodies large enough to overflow the JVM heap.
-
-The underlying service layer _is_ designed to work with text streams,
-anticipating a future service endpoint in which you simply upload text.
+I am anticipating a future service endpoint in which you simply upload text.
 
 Everything is in one JAR, but in real life the business logic and
 the web service would be in different JARs, built separately.

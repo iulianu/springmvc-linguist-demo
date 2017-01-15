@@ -2,21 +2,20 @@ package com.iuliandogariu.linguist.ngram;
 
 import org.junit.Test;
 
-import java.util.List;
 import java.util.Map;
 
 import static org.junit.Assert.*;
 
-public final class NgramCounterTest {
+public final class SequentialNgramCounterConsumerTest {
 
     @Test
     public void shouldCountNgrams() {
-        NgramCounter counter = new NgramCounter();
+        SequentialNgramCounterConsumer counter = new SequentialNgramCounterConsumer();
         counter.accept("a");
         counter.accept("b");
         counter.accept("a");
         counter.accept("c");
-        Map<Ngram, Integer> counts = counter.getCounts();
+        Map<Ngram, Long> counts = counter.getCounts();
         // 9 n-grams possible, but the 1-gram "a" is duplicated
         assertEquals(8, counts.size());
         assertEquals(2, counts.get(new Ngram(1, "a")).intValue());

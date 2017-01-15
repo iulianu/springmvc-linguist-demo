@@ -14,10 +14,10 @@ public class TopCounts {
      *            in descending order.
      * @return list of keys plus their count
      */
-    public static <K> List<Map.Entry<K, Integer>> ofMap(Map<K, Integer> counts, int max) {
-        List<Map.Entry<K, Integer>> entries = new ArrayList<>(counts.entrySet());
+    public static <K> List<Map.Entry<K, Long>> ofMap(Map<K, Long> counts, int max) {
+        List<Map.Entry<K, Long>> entries = new ArrayList<>(counts.entrySet());
         entries.sort(Collections.reverseOrder(Comparator.comparing(Map.Entry::getValue)));
-        List<Map.Entry<K, Integer>> topEntries = entries;
+        List<Map.Entry<K, Long>> topEntries = entries;
         if(entries.size() > max) {
             topEntries = entries.subList(0, max);
         }

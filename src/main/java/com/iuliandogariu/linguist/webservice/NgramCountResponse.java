@@ -12,9 +12,9 @@ public final class NgramCountResponse {
 
     private String ngram;
 
-    private int count;
+    private long count;
 
-    public NgramCountResponse(String ngram, int count) {
+    public NgramCountResponse(String ngram, long count) {
         this.ngram = ngram;
         this.count = count;
     }
@@ -23,9 +23,9 @@ public final class NgramCountResponse {
         return ngram;
     }
 
-    public int getCount() { return count; }
+    public long getCount() { return count; }
 
-    public static NgramCountResponse fromNgramCount(Map.Entry<Ngram, Integer> ngramCount) {
+    public static NgramCountResponse fromNgramCount(Map.Entry<Ngram, Long> ngramCount) {
         // NgramCountResponse and NgramCount have similar fields,
         // but still are distinct classes because they represent distinct
         // concepts.
