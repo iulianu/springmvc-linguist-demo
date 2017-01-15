@@ -14,7 +14,15 @@ class SequentialNgramCounterConsumer implements Consumer<String> {
 
     public Map<Ngram, Long> getCounts() { return counts; }
 
-    private TokenMemory tokenMemory = new TokenMemory();
+    private TokenMemory tokenMemory;
+
+    public SequentialNgramCounterConsumer() {
+        this(new CircularBufferTokenMemory());
+    }
+
+    public SequentialNgramCounterConsumer(TokenMemory tokenMemory) {
+        this.tokenMemory = tokenMemory;
+    }
 
     @Override
     public void accept(String currentToken) {

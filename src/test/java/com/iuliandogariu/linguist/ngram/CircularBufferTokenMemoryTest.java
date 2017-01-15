@@ -7,11 +7,11 @@ import java.util.Collection;
 import static org.hamcrest.Matchers.containsInAnyOrder;
 import static org.junit.Assert.assertThat;
 
-public class TokenMemoryTest {
+public class CircularBufferTokenMemoryTest {
 
     @Test
     public void shouldEmitNgrams() {
-        TokenMemory tokenMemory = new TokenMemory(3);
+        CircularBufferTokenMemory tokenMemory = new CircularBufferTokenMemory(3);
         Collection<Ngram> emittedNgrams;
 
         emittedNgrams = tokenMemory.acceptToken("a");

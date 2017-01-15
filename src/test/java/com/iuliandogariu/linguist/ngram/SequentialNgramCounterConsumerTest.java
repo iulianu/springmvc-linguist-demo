@@ -1,7 +1,10 @@
 package com.iuliandogariu.linguist.ngram;
 
 import org.junit.Test;
+import org.mockito.Mockito;
+import static org.mockito.Mockito.*;
 
+import java.util.Arrays;
 import java.util.Map;
 
 import static org.junit.Assert.*;
@@ -10,21 +13,21 @@ public final class SequentialNgramCounterConsumerTest {
 
     @Test
     public void shouldCountNgrams() {
-        SequentialNgramCounterConsumer counter = new SequentialNgramCounterConsumer();
-        counter.accept("a");
-        counter.accept("b");
-        counter.accept("a");
-        counter.accept("c");
+        TokenMemory tokenMemory = Mockito.mock(TokenMemory.class);
+        when(tokenMemory.acceptToken(anyString())).thenReturn(
+                Arrays.asList(
+                        new Ngram(1, "b"),
+                        new Ngram(1, "b"),
+                        new Ngram(2, "a b")
+                )
+        );
+        SequentialNgramCounterConsumer counter = new SequentialNgramCounterConsumer(tokenMemory);
+        counter.accept("_");
+        counter.accept("_");
         Map<Ngram, Long> counts = counter.getCounts();
         // 9 n-grams possible, but the 1-gram "a" is duplicated
-        assertEquals(8, counts.size());
-        assertEquals(2, counts.get(new Ngram(1, "a")).intValue());
-        assertEquals(1, counts.get(new Ngram(1, "b")).intValue());
-        assertEquals(1, counts.get(new Ngram(1, "c")).intValue());
-        assertEquals(1, counts.get(new Ngram(2, "a b")).intValue());
-        assertEquals(1, counts.get(new Ngram(2, "b a")).intValue());
-        assertEquals(1, counts.get(new Ngram(2, "a c")).intValue());
-        assertEquals(1, counts.get(new Ngram(3, "a b a")).intValue());
-        assertEquals(1, counts.get(new Ngram(3, "b a c")).intValue());
+        assertEquals(2, counts.size());
+        assertEquals(4, counts.get(new Ngram(1, "b")).intValue());
+        assertEquals(2, counts.get(new Ngram(2, "a b")).intValue());
     }
 }

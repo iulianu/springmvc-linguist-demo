@@ -20,7 +20,7 @@ import java.util.regex.MatchResult;
  */
 public class ParallelNgramSpliterator extends ParallelTokenizingSpliterator<Ngram> {
 
-    private TokenMemory tokenMemory = new TokenMemory();
+    private CircularBufferTokenMemory tokenMemory = new CircularBufferTokenMemory();
 
     public ParallelNgramSpliterator(String text) {
         this(text, DEFAULT_SPLIT_SIZE, new String[]{});
@@ -47,7 +47,7 @@ public class ParallelNgramSpliterator extends ParallelTokenizingSpliterator<Ngra
     protected Pair<Spliterator<Ngram>, Integer> trySplitAtTokenBoundary(int currentChar, int referencePos) {
         final Pair<Spliterator<Ngram>, Integer> NULL_RESULT = Pair.of(null, text.length());
 
-        TokenMemory tempTokenMemory = new TokenMemory(tokenMemory.getMaxOrder());
+        CircularBufferTokenMemory tempTokenMemory = new CircularBufferTokenMemory(tokenMemory.getMaxOrder());
         // Scan tokens in advance
         int splitPos = referencePos;
         while(!tempTokenMemory.isAtFullCapacity()) {
@@ -78,4 +78,3 @@ public class ParallelNgramSpliterator extends ParallelTokenizingSpliterator<Ngra
         return Pair.of(spliterator, splitPos);
     }
 }
-
