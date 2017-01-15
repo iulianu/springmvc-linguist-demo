@@ -13,29 +13,29 @@ import static java.util.function.Function.identity;
 import static java.util.stream.Collectors.counting;
 
 /**
- * The two public service methods
- * do the same thing, but one of them works on text streams.
+ * Counts N-grams (1-grams, 2-grams and 3-grams) occurring in the specified text.
+ *
+ * Two service methods are exposed:
+ *  - countNgrams() accepts a String and performs the count in parallel
+ *  - countNgramsInStream() accepts a Reader and performs the count sequentially.
  */
 @Service
 public class NgramCountService {
 
     /**
-     * Counts N-grams (1-grams, 2-grams and 3-grams) occurring in the specified text.
      * @return list of Ngram counts in descending order of count,
      * up to a maximum of maxNgramCount.
      *
-     * If you have an InputStream instead of a String, see the other overload.
+     * If you have an InputStream instead of a String, see countNgramsInStream().
      */
     public List<Map.Entry<Ngram, Long>> countNgrams(int maxNgramCount, String text) {
         Map<Ngram, Long> counts = StreamSupport.stream(
-                new ParallelNgramSpliterator(text),
-                true)
+                    new ParallelNgramSpliterator(text), true)
                 .collect(Collectors.groupingByConcurrent(identity(), counting()));
         return TopCounts.ofMap(counts, maxNgramCount);
     }
 
     /**
-     * Counts N-grams (1-grams, 2-grams and 3-grams) occurring in the specified text stream.
      * @return list of Ngram counts in descending order of count,
      * up to a maximum of maxNgramCount.
      *
@@ -43,7 +43,7 @@ public class NgramCountService {
      * as opposed to the full text in memory.
      */
     public List<Map.Entry<Ngram, Long>> countNgramsInStream(int maxNgramCount, Reader textReader) {
-        Map<Ngram, Long> counts = SequentialTokenStream.ofReaderWithDelimiter(textReader, "\\W+")
+        Map<Ngram, Long> counts = SequentialTokenStream.ofReaderWithDelimiter(textReader, Ngram.DELIMITER_PATTERN)
                 .collect(SequentialNgramCounterConsumer::new, SequentialNgramCounterConsumer::accept, SequentialNgramCounterConsumer::combine)
                 .getCounts();
         return TopCounts.ofMap(counts, maxNgramCount);

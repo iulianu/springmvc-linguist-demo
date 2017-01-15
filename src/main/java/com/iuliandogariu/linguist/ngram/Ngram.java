@@ -1,10 +1,13 @@
 package com.iuliandogariu.linguist.ngram;
 
-import org.apache.commons.lang3.builder.CompareToBuilder;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
-public final class Ngram implements Comparable<Ngram> {
+import java.util.regex.Pattern;
+
+public final class Ngram {
+
+    public static final Pattern DELIMITER_PATTERN = Pattern.compile("\\W+");
 
     private int order;
     private String tokens;
@@ -43,13 +46,5 @@ public final class Ngram implements Comparable<Ngram> {
                 .append(order, rhs.order)
                 .append(tokens, rhs.tokens)
                 .isEquals();
-    }
-
-    @Override
-    public int compareTo(Ngram o) {
-         return new CompareToBuilder()
-            .append(this.order, o.order)
-            .append(this.tokens, o.tokens)
-            .toComparison();
     }
 }

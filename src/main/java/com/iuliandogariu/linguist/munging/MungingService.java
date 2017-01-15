@@ -5,10 +5,17 @@ import org.springframework.stereotype.Service;
 
 import java.io.*;
 import java.util.stream.Stream;
+import java.util.stream.StreamSupport;
+
+import static com.iuliandogariu.linguist.munging.PhrasePair.UNMUNGED_FORMAT_DELIMITER;
 
 /**
- * This service exposes two interfaces that do the same thing,
- * but one of them operates in a streaming fashion.
+ * Returns munged representations of phrase pairs passed in
+ * unmunged format.
+ * Two service methods are exposed:
+ *  - mungedPhrasePairs() accepts a String and munges the phrase pairs in parallel
+ *  - mungedPhrasePairsFromStream() accepts a Reader and munges
+ *    the phrase pairs sequentially.
  */
 @Service
 public class MungingService {
@@ -19,21 +26,27 @@ public class MungingService {
      * @param unmungedText the unmunged form of the phrase pairs
      * @return a representation of all the phrase pairs in the text.
      */
-    public PhraseBook unmungedPhraseBook(String unmungedText) {
-        PhraseBook phraseBook = new PhraseBook();
-        Stream<PhrasePair> phraseStream = phrasePairStream(new StringReader(unmungedText));
-        phraseStream.forEach(phraseBook::add);
-        return phraseBook;
+    public String mungedPhrasePairs(String unmungedText) {
+        return StreamSupport.stream(
+                    new ParallelPhrasePairSpliterator(unmungedText),true)
+                .map(PhrasePair::toMungedString)
+                .collect(PhraseBook.mungedCollector());
     }
 
     /**
-     * Call this service method if you have a _stream_ of the request text.
+     * Call this service method if you have a stream with the request text,
+     * e.g. from a network socket.
      *
-     * @param unmungedReader a Reader that gives access to the unmunged text form
-     *                       of the phrase pairs
-     * @return a stream of all the phrase pairs in the text.
+     * @param unmungedTextReader the unmunged form of the phrase pairs, as a Reader
+     * @return a representation of all the phrase pairs in the text.
      */
-    public Stream<PhrasePair> phrasePairStream(Reader unmungedReader) {
+    public String mungedPhrasePairsFromStream(Reader unmungedTextReader) {
+        return phrasePairStream(unmungedTextReader)
+                .map(PhrasePair::toMungedString)
+                .collect(PhraseBook.mungedCollector());
+    }
+
+    private Stream<PhrasePair> phrasePairStream(Reader unmungedReader) {
         return unmungedPhraseStream(unmungedReader).map(PhrasePair::fromUnmungedString);
     }
 
@@ -46,6 +59,6 @@ public class MungingService {
      * @return a Stream of Strings each representing a single phrase pair.
      */
     Stream<String> unmungedPhraseStream(Reader unmungedReader) {
-        return SequentialTokenStream.ofReaderWithDelimiter(unmungedReader, "(?:\\A|\\s+)(?=PP \\d+ \\d+)");
+        return SequentialTokenStream.ofReaderWithDelimiter(unmungedReader, UNMUNGED_FORMAT_DELIMITER);
     }
 }

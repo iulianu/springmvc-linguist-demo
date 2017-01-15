@@ -20,6 +20,6 @@ public final class MungingController {
     @PostMapping(value = "/format")
     public Callable<MungingResponse> munge(@Valid @RequestBody MungingRequest mungingRequest) {
         return () -> new MungingResponse(
-                mungingService.unmungedPhraseBook(mungingRequest.getText()).toMungedString());
+                mungingService.mungedPhrasePairs(mungingRequest.getText()));
     }
 }

@@ -16,7 +16,7 @@ public final class ParallelNgramSpliteratorTest {
     public void shouldStreamNgramsInParallel() {
         String requestText = "a b c d e f g h i j";
         List<String> ngrams = StreamSupport.stream(
-                    new ParallelNgramSpliterator(requestText, 100000),true)
+                    new ParallelNgramSpliterator(requestText, 4),true)
                 .map(Ngram::getTokens)
                 .collect(Collectors.toList());
         assertThat(ngrams, containsInAnyOrder(

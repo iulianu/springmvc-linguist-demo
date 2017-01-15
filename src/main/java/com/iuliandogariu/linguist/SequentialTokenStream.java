@@ -16,10 +16,9 @@ public class SequentialTokenStream {
      *
      * Note the returned stream is _not_ parallelizable.
      */
-    public static Stream<String> ofReaderWithDelimiter(Reader textReader, String delimiterPattern) {
-        Pattern pairPattern = Pattern.compile(delimiterPattern);
+    public static Stream<String> ofReaderWithDelimiter(Reader textReader, Pattern delimiterPattern) {
         Scanner scanner = new Scanner(textReader);
-        scanner.useDelimiter(pairPattern);
+        scanner.useDelimiter(delimiterPattern);
         return StreamSupport.stream(
                 Spliterators.spliteratorUnknownSize(scanner, Spliterator.ORDERED),
                 false);

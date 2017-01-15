@@ -7,6 +7,7 @@ import java.io.StringReader;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -18,7 +19,8 @@ public final class SequentialTokenStreamTest {
     public void shouldTokenizeTextStream() {
         NgramCountService service = new NgramCountService();
         String requestText = "What's in a token ? I bet you cannot tell!";
-        Stream<String> tokenStream = SequentialTokenStream.ofReaderWithDelimiter(new StringReader(requestText), "\\W+");
+        Stream<String> tokenStream = SequentialTokenStream.ofReaderWithDelimiter(new StringReader(requestText),
+                Pattern.compile("\\W+"));
         List<String> tokensList = tokenStream.collect(Collectors.toList());
         assertEquals(
                 Arrays.asList("What", "s", "in", "a", "token", "I", "bet", "you", "cannot", "tell"),

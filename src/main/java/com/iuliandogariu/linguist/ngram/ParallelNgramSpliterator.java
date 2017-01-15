@@ -31,7 +31,7 @@ public class ParallelNgramSpliterator extends ParallelTokenizingSpliterator<Ngra
     }
 
     public ParallelNgramSpliterator(String text, int maxSplitSize, String[] pastTokens) {
-        super(text, maxSplitSize, "\\W+");
+        super(text, maxSplitSize, Ngram.DELIMITER_PATTERN);
 //        System.err.printf("Split %d %s\n", text.length(), text);
         tokenMemory.initFromSnapshot(pastTokens);
     }

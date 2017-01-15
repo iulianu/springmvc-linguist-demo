@@ -24,12 +24,11 @@ public abstract class ParallelTokenizingSpliterator<T> implements Spliterator<T>
     private int currentChar = 0;
     private Matcher delimiterMatcher;
 
-    protected ParallelTokenizingSpliterator(String text, int maxSplitSize, String delimiterPattern) {
+    protected ParallelTokenizingSpliterator(String text, int maxSplitSize, Pattern delimiterPattern) {
         this.maxSplitSize = maxSplitSize;
 //        System.err.printf("Split %d %s\n", text.length(), text);
         this.text = text;
-        Pattern pairPattern = java.util.regex.Pattern.compile(delimiterPattern);
-        delimiterMatcher = pairPattern.matcher(text);
+        delimiterMatcher = delimiterPattern.matcher(text);
     }
 
     @Override
@@ -47,7 +46,11 @@ public abstract class ParallelTokenizingSpliterator<T> implements Spliterator<T>
         if (currentChar >= text.length())
             return false;
 
-        MatchResult delimResult = findNextDelimiter(currentChar);
+        MatchResult delimResult = null;
+        if( currentChar < text.length() - 1 ) {
+            delimResult = findNextDelimiter(currentChar + 1);
+        }
+
         if (delimResult != null) {
             if (delimResult.start() > currentChar) {
                 acceptToken(action, text.substring(currentChar, delimResult.start()));
@@ -84,7 +87,8 @@ public abstract class ParallelTokenizingSpliterator<T> implements Spliterator<T>
                 if (splitPos >= text.length())
                     return null;
 
-                // Let the new spliterator continue from this position
+                // Let the new spliterator continue from the current position.
+                // We are jumping ahead.
                 currentChar = splitPos;
                 return newSpliterator;
             }
