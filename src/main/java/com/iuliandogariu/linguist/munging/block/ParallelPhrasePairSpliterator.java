@@ -11,7 +11,7 @@ import java.util.regex.MatchResult;
 import static com.iuliandogariu.linguist.munging.PhrasePair.UNMUNGED_FORMAT_DELIMITER;
 
 /**
- * A Spliterator that works over a String and emits Phrase pairs.
+ * A Spliterator that works over an unmunged String and emits Phrase pairs.
  */
 public class ParallelPhrasePairSpliterator extends ParallelTokenizingSpliterator<PhrasePair> {
 
