@@ -84,7 +84,7 @@ public class ParallelNgramSpliterator extends ParallelTokenizingSpliterator<Ngra
 
         // Let the new spliterator continue from this position
         String[] pastTokensSnapshot = tokenMemory.snapshot();
-        System.err.printf("X Splitting %d-%d\n", currentChar, splitPos);
+//        System.err.printf("X Splitting %d-%d\n", currentChar, splitPos);
         Spliterator<Ngram> spliterator =
                 new ParallelNgramSpliterator(text.substring(currentChar, splitPos), maxSplitSize, pastTokensSnapshot);
 

@@ -37,6 +37,13 @@ It reads the unmunged phrase pairs from standard input and writes
 the munged phrase pairs to the standard output. It can work with files
 of arbitrary size with no need for a large Java heap.
 
+A demo of the parallel Munging service is ParallelMungingApp, a console app.
+It reads input and writes output from/to files on disk. It needs a lot of heap
+to do its work, but should give you a nice speedup because of parallelism.
+Run with Java 1.8.0_112, on a MacBook Pro with Intel Core i5 with four cores,
+the speedup is around 2,5x compared to single-threaded performance.
+I tested with a 330 MB file and -Xmx6G.
+
 Everything is in one JAR, but in real life the business logic and
 the web service would be in different JARs, built separately.
 
