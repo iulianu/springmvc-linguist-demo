@@ -17,7 +17,7 @@ public class TopCounts {
      * @return list of keys plus their count
      */
     public static <K> List<Map.Entry<K, Long>> ofMap(Map<K, Long> counts, int limit) {
-        return counts.entrySet().stream()
+        return counts.entrySet().parallelStream()
                 .sorted(reverseOrder(comparing(Map.Entry::getValue)))
                 .limit(limit)
                 .collect(Collectors.toList());
