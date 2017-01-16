@@ -26,9 +26,6 @@ public final class NgramCountResponse {
     public long getCount() { return count; }
 
     public static NgramCountResponse fromNgramCount(Map.Entry<Ngram, Long> ngramCount) {
-        // NgramCountResponse and NgramCount have similar fields,
-        // but still are distinct classes because they represent distinct
-        // concepts.
         return new NgramCountResponse(ngramCount.getKey().getTokens(), ngramCount.getValue());
     }
 }

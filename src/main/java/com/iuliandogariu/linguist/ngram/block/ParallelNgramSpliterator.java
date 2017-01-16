@@ -32,7 +32,7 @@ public class ParallelNgramSpliterator extends ParallelTokenizingSpliterator<Ngra
     /**
      *
      * @param text text to work on
-     * @param maxSplitSize hint about the size of a chunk of text, in numbers of characters
+     * @param maxSplitSize hint about the size of a chunk of text, in number of characters
      */
     public ParallelNgramSpliterator(String text, int maxSplitSize) {
         this(text, maxSplitSize, new String[]{});
@@ -41,7 +41,7 @@ public class ParallelNgramSpliterator extends ParallelTokenizingSpliterator<Ngra
     /**
      *
      * @param text text to work on
-     * @param maxSplitSize hint about the size of a chunk of text, in numbers of characters
+     * @param maxSplitSize hint about the size of a chunk of text, in number of characters
      * @param pastTokens tokens with which to populate the token memory,
      *                   this parameter is non-empty after the Spliterator has split in two.
      */

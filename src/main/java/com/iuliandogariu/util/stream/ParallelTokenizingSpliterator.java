@@ -22,7 +22,7 @@ import java.util.regex.Pattern;
  */
 public abstract class ParallelTokenizingSpliterator<T> implements Spliterator<T> {
 
-    /** in numbers of characters */
+    /** in number of characters */
     protected static final int DEFAULT_SPLIT_SIZE = 40_000_000;
     protected final String text;
     protected int maxSplitSize = 0;
@@ -32,7 +32,7 @@ public abstract class ParallelTokenizingSpliterator<T> implements Spliterator<T>
     /**
      *
      * @param text text to iterate on
-     * @param maxSplitSize hint about the size of a chunk of text, in numbers of characters
+     * @param maxSplitSize hint about the size of a chunk of text, in number of characters
      * @param delimiterPattern pattern that delimits tokens in the text
      */
     protected ParallelTokenizingSpliterator(String text, int maxSplitSize, Pattern delimiterPattern) {
@@ -42,6 +42,10 @@ public abstract class ParallelTokenizingSpliterator<T> implements Spliterator<T>
         delimiterMatcher = delimiterPattern.matcher(text);
     }
 
+    /**
+     * @return estimated number of characters still remaining
+     * to be processed by this spliterator.
+     */
     @Override
     public final long estimateSize() {
         return text.length() - currentChar;

@@ -23,8 +23,6 @@ public final class NgramCountController {
 
     @PostMapping(value = "/ngram")
     public Callable<List<NgramCountResponse>> ngramCount(@Valid @RequestBody NgramCountRequest ngramCountRequest) {
-        // Note: if you had an InputStream instead of the full text,
-        // you would call SequentialNgramCountService.countNgramsInStream(new InputStreamReader(...))
         return () -> ngramCountService.countNgrams(ngramCountRequest.getMaxNGramCount(), ngramCountRequest.getText())
                 .stream()
                 .map(NgramCountResponse::fromNgramCount)

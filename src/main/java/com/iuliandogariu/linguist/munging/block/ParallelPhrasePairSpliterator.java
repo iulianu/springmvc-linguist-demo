@@ -22,7 +22,7 @@ public class ParallelPhrasePairSpliterator extends ParallelTokenizingSpliterator
     /**
      *
      * @param text text to iterate on
-     * @param maxSplitSize hint about the size of a chunk of text, in numbers of characters
+     * @param maxSplitSize hint about the size of a chunk of text, in number of characters
      */
     public ParallelPhrasePairSpliterator(String text, int maxSplitSize) {
         super(text, maxSplitSize, UNMUNGED_FORMAT_DELIMITER);
