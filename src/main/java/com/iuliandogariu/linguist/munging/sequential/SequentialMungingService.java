@@ -12,6 +12,11 @@ import java.io.Writer;
 public interface SequentialMungingService {
 
     /**
+     * Returns munged representations of phrase pairs passed in
+     * unmunged format.
+     *
+     * The call to this service method blocks until the input Reader reaches EOF.
+     *
      * @param unmungedTextReader the unmunged form of the phrase pairs, as a Reader
      * @param out writer where to write munged phrase pairs.
      */

@@ -16,6 +16,8 @@ public interface SequentialNgramCountService {
     /**
      * @return list of Ngram counts in descending order of count,
      * up to a maximum of maxNgramCount.
+     *
+     * The call to this service method blocks until the input Reader reaches EOF.
      */
     List<Map.Entry<Ngram, Long>> countNgramsInStream(int maxNgramCount, Reader textReader);
 

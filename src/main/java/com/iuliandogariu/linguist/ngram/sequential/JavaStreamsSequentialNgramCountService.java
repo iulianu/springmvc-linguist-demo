@@ -27,6 +27,8 @@ public class JavaStreamsSequentialNgramCountService implements SequentialNgramCo
      *
      * Call this service method if you have an InputStream, e.g. from a network socket,
      * as opposed to the full text in memory.
+     *
+     * The call to this service method blocks until the input Reader reaches EOF.
      */
     public List<Map.Entry<Ngram, Long>> countNgramsInStream(int maxNgramCount, Reader textReader) {
         Map<Ngram, Long> counts = SequentialTokenStream.ofReader(textReader)
