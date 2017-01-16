@@ -9,9 +9,9 @@ import java.io.*;
  * A demo of the sequential munging service on streams.
  * Create a large file with phrase pairs in unmunged format, e.g. in.txt
  * Run it:
- *   java  -cp target/classes com.iuliandogariu.linguist.console.MungingApp < in.txt > out.txt
+ *   java  -cp target/classes com.iuliandogariu.linguist.console.SequentialMungingApp < in.txt > out.txt
  */
-public class MungingApp {
+public class SequentialMungingApp {
     public static void main(String[] args) throws IOException {
         Reader reader = new BufferedReader(new InputStreamReader(System.in));
         Writer out = new BufferedWriter(new OutputStreamWriter(System.out));
