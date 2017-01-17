@@ -23,7 +23,7 @@ import java.util.regex.Pattern;
 public abstract class ParallelTokenizingSpliterator<T> implements Spliterator<T> {
 
     /** in number of characters */
-    protected static final int DEFAULT_SPLIT_SIZE = 40_000_000;
+    public static final int DEFAULT_SPLIT_SIZE = 40_000_000;
     protected final String text;
     protected int maxSplitSize = 0;
     private int currentChar = 0;

@@ -24,6 +24,16 @@ import static java.util.stream.Collectors.counting;
 @Service
 public class JavaStreamsBlockNgramCountService implements BlockNgramCountService {
 
+    private int maxSplitSize;
+
+    public JavaStreamsBlockNgramCountService() {
+        this(ParallelNgramSpliterator.DEFAULT_SPLIT_SIZE);
+    }
+
+    public JavaStreamsBlockNgramCountService(int maxSplitSize) {
+        this.maxSplitSize = maxSplitSize;
+    }
+
     /**
      * @return list of Ngram counts in descending order of count,
      * up to a maximum of maxNgramCount.
@@ -31,7 +41,7 @@ public class JavaStreamsBlockNgramCountService implements BlockNgramCountService
     @Override
     public List<Map.Entry<Ngram, Long>> countNgrams(int maxNgramCount, String text) {
         Map<Ngram, Long> counts = StreamSupport.stream(
-                    new ParallelNgramSpliterator(text), true)
+                    new ParallelNgramSpliterator(text, maxSplitSize), true)
                 .collect(Collectors.groupingByConcurrent(identity(), counting()));
         return TopCounts.ofMap(counts, maxNgramCount);
     }

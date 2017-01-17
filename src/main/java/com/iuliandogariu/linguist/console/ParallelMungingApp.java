@@ -11,7 +11,8 @@ import java.nio.file.Paths;
  * A demo of the parallel munging service.
  * Create a large file with phrase pairs in unmunged format, e.g. in.txt
  * Run it:
- *   java -Xmx6G -cp target/classes com.iuliandogariu.linguist.console.ParallelMungingApp in.txt out.txt
+ *   java -Xmx6G -cp target/classes:target/springmvc-linguist-0.1.0/WEB-INF/lib/* \
+ *      com.iuliandogariu.linguist.console.ParallelMungingApp in.txt out.txt
  * To observe speedups from parallelism, make sure the input file is at least
  * 80 MB, i.e. twice the size of the maximum split (40MB).
  */
